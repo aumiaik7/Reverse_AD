@@ -12,7 +12,7 @@ classdef valder
      
    end 
    methods
- global x 
+ global x = [1 2 3]
       function obj = valder(a,b)
 
           sprintf('**  valder   **');

@@ -16,10 +16,10 @@ vec = double(f);
 
 x = valder(a0,[1]); %angle in degrees
 #x = a0;
-y = valder(v0,[1]); %velocity in ft/sec
-#y = v0;
-#z = h0;
-z = valder(h0,[1]); %height in ft
+#y = valder(v0,[0 1 0]); %velocity in ft/sec
+y = v0;
+z = h0;
+#z = valder(h0,[0 0 1]); %height in ft
 #x = x*pi/180;
 #y = y*pi/180;
 f = x*z*sin(x*y);
