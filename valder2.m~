@@ -14,11 +14,12 @@ classdef valder
    end 
    methods
 
-      function obj = valder(a,b)
+      function obj = valder2(a,b)
 
-	   global i = 0;	
+
           sprintf('**  valder   **');
-          
+          a
+          b
 	  	
          %VALDER class constructor; only the bottom case is needed.
          if nargin == 0 %never intended for use.
@@ -30,11 +31,9 @@ classdef valder
             #obj.der = 0;
 	  # obj.store = 0;
          else
-a
-          b
             obj.val = a; %given function value
 
-	    obj.der = b;  %given derivative value or gradient vector
+	    obj.der = [b];  %given derivative value or gradient vector
 	    #obj.store = c;
          end
       end
@@ -93,7 +92,7 @@ a
          else
 	   
             #h = valder(u.val*v.val, u.der*v.val + u.val*v.der);
-            h = valder(u.val*v.val, [u.der; v.der; v.val u.val]);
+            h = valder(u.val*v.val, [u.der v.der v.val u.val]);
             sprintf('**  3   **')
          end
       end
@@ -146,19 +145,19 @@ a
           sprintf('**  sin   **');
          %VALDER/SIN overloads sine with a valder object argument
          #h = valder(sin(u.val), cos(u.val)*u.der);
-         h = valder(sin(u.val), [u.der; cos(u.val) 0]);
+         h = valder(sin(u.val), [u.der cos(u.val)]);
       end
       function h = cos(u)
           sprintf('**  cos   **');
          %VALDER/COS overloads cosine of a valder object argument
          #h = valder(cos(u.val), -sin(u.val)*u.der);
-         h = valder(cos(u.val), [u.der; -sin(u.val) 0]);
+         h = valder(cos(u.val), [u.der -sin(u.val)]);
       end
       function h = tan(u)
           sprintf('**  tan   **');
          %VALDER/TAN overloads tangent of a valder object argument
          #h = valder(tan(u.val), (sec(u.val))^2*u.der);
-         h = valder(tan(u.val), (sec(u.val))^2);val
+         h = valder(tan(u.val), (sec(u.val))^2);
       end
       function h = asin(u)
           sprintf('**  asin   **');

@@ -13,15 +13,17 @@ vhor = (v*cos(rad))^2;
 f = (vhor/32)*(tana + sqrt(tana^2+64*h/vhor)); %horizontal range
 vec = double(f);
 #}
-
-x = valder(a0,[1]); %angle in degrees
+store = [];
+x = valder(a0,store); %angle in degrees
 #x = a0;
-y = valder(v0,[1]); %velocity in ft/sec
+y = valder(v0,store); %velocity in ft/sec
 #y = v0;
 #z = h0;
-z = valder(h0,[1]); %height in ft
+z = valder(h0,store); %height in ft
 #x = x*pi/180;
 #y = y*pi/180;
 f = x*z*sin(x*y);
+vec = double(f)
+[m,n] = size(vec);
+new = zeros(n,n)
 
-vec = double(f);

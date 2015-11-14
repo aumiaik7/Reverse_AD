@@ -9,32 +9,39 @@ classdef valder
    properties
       val  %function value
       der  %derivative value or gradient vector
+
      
    end 
    methods
- global x 
+
       function obj = valder(a,b)
 
+	   global i = 0;	
           sprintf('**  valder   **');
-          a
-          b
+          
+	  	
          %VALDER class constructor; only the bottom case is needed.
          if nargin == 0 %never intended for use.
             obj.val = [];
-            obj.der = [];
+            #obj.der = [];
+	    #obj.store = [];
          elseif nargin == 1 %c=valder(a) for constant w/ derivative 0.
             obj.val = a;
-            obj.der = 0;
+            #obj.der = 0;
+	  # obj.store = 0;
          else
+	  a
+          b
             obj.val = a; %given function value
-            obj.der = b; %given derivative value or gradient vector
+
+	    obj.der = b;  %given derivative value or gradient vector
+	    #obj.store = c;
          end
       end
       function vec = double(obj)
-
          %VALDER/DOUBLE Convert valder object to vector of doubles.
-         sprintf('**  double   **');
-         vec = [ obj.val, obj.der ];
+         sprintf('**  double   **')
+         vec = [ obj.der ];
       end
       function h = plus(u,v)
           sprintf('**  plus   **');
@@ -77,16 +84,16 @@ classdef valder
          %VALDER/MTIMES overloads multiplication * with at least one valder object argument
          if ~isa(u,'valder') %u is a scalar
             #h = valder(u*v.val, u*v.der);
-            h = valder(u*v.val, u);
+            h = valder(u*v.val, u, u);
              sprintf('**  1   **')
          elseif ~isa(v,'valder') %v is a scalar
             #h = valder(v*u.val, v*u.der);
-            h = valder(v*u.val, v);
+            h = valder(v*u.val, v ,v );
             sprintf('**  2   **')
          else
-	    x = [x v.val u.val]
+	   
             #h = valder(u.val*v.val, u.der*v.val + u.val*v.der);
-            h = valder(u.val*v.val, v.val + u.val);
+            h = valder(u.val*v.val, [u.der; v.der; v.val u.val]);
             sprintf('**  3   **')
          end
       end
@@ -139,19 +146,19 @@ classdef valder
           sprintf('**  sin   **');
          %VALDER/SIN overloads sine with a valder object argument
          #h = valder(sin(u.val), cos(u.val)*u.der);
-         h = valder(sin(u.val), cos(u.val));
+         h = valder(sin(u.val), [u.der; cos(u.val) 0]);
       end
       function h = cos(u)
           sprintf('**  cos   **');
          %VALDER/COS overloads cosine of a valder object argument
          #h = valder(cos(u.val), -sin(u.val)*u.der);
-         h = valder(cos(u.val), -sin(u.val));
+         h = valder(cos(u.val), [u.der; -sin(u.val) 0]);
       end
       function h = tan(u)
           sprintf('**  tan   **');
          %VALDER/TAN overloads tangent of a valder object argument
          #h = valder(tan(u.val), (sec(u.val))^2*u.der);
-         h = valder(tan(u.val), (sec(u.val))^2);
+         h = valder(tan(u.val), (sec(u.val))^2);val
       end
       function h = asin(u)
           sprintf('**  asin   **');
