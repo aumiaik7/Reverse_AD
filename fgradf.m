@@ -13,21 +13,17 @@ vhor = (v*cos(rad))^2;
 f = (vhor/32)*(tana + sqrt(tana^2+64*h/vhor)); %horizontal range
 vec = double(f);
 #}
-store = [0 0 1 0];
+
 x = valder(a0); 
-store = [store];
 y = valder(v0); 
-#y = v0;
-#z = h0;
-store = [store;0 0 3 0];
 z = valder(h0); 
-#x = x*pi/180;
-#y = y*pi/180;
 v1 = x*z;
 v2 = x*y;
 v3 = sin(v2);
 v4 = v1*v3;
-vec = double(v4)
+vec = single(v4);
+
+
 [m,n] = size(vec);
 new = zeros(n,n);
 

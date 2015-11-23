@@ -32,24 +32,32 @@ classdef valder
 	    [row,col] = size(store);
 	    store = [store;0 0 row 0];
 	    obj.pos = row;
-	    obj.der = store;
+	   # obj.der = store;
             #obj.der = 0;
 	  # obj.store = 0;
   
          else
 	  
             obj.val = a; %given function value
-            store = [store;b];
-	    [row,col] = size(store);	
-	    obj.pos = row - 1 ;
-	    obj.der = store;	
+            [row,col] = size(store);
+	    store = [store;b];
+	    obj.pos = row;
+	    #obj.der = store;	
 	    #obj.store = c;
  
          end
       end
       
+          
+      function mat = single(obj)
+		
+	global store;
+	mat = store;
+      end
+
       function vec = double(obj)
          %VALDER/DOUBLE Convert valder object to vector of doubles.
+	
          sprintf('**  double   **')
          vec = [ obj.der];
 
